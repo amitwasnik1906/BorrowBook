@@ -12,12 +12,31 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
   });
 });
 
-// get borrow Transactions of user
-// get Lend Transactions of user
+// get borrow/Lend Transactions of user
+// Search Transaction by some search keyword
 exports.getTransactions = asyncHandler(async (req, res, next) => {
   const { userId, type } = req.body;
 
-  const transactions = await Transaction.find({ userId, type });
+  const keyword = req.query.keyword
+    ? {
+        $or: [
+          {
+            name: {
+              $regex: req.query.keyword,
+              $options: "i",
+            },
+          },
+          {
+            description: {
+              $regex: req.query.keyword,
+              $options: "i",
+            },
+          },
+        ],
+      }
+    : {};
+
+  const transactions = await Transaction.find({ userId, type, ...keyword });
 
   res.status(200).json({
     success: true,
@@ -79,10 +98,10 @@ exports.deleteTransaction = asyncHandler(async (req, res, next) => {
     return next(new ApiErrorHandler(404, "Transaction not found"));
   }
 
-  await Transaction.findByIdAndDelete(req.params.id)
+  await Transaction.findByIdAndDelete(req.params.id);
 
   res.status(200).json({
     success: true,
-    message: "Transaction Deleted Successfully"
-  })
+    message: "Transaction Deleted Successfully",
+  });
 });
