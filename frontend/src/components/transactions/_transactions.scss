@@ -1,0 +1,17 @@
+@import "../../base";
+
+.transactions{
+    height: 92vh;
+    width: 100%;
+
+    &__container{
+        height: 74vh;
+        overflow: auto;
+    }
+
+    &__footer{
+        border: 1px solid blue;
+        position: absolute;
+        bottom: 0px;
+    }
+}
