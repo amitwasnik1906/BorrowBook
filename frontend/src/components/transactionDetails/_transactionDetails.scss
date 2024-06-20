@@ -1,0 +1,17 @@
+@import "../../base";
+
+.details{
+    display: flex;
+    flex-direction: column;
+
+    &__top{
+        display: flex;
+        justify-content: space-between;
+        &__btn{
+            button{
+                // border: none;
+                background-color: transparent;
+            }
+        }
+    }
+}

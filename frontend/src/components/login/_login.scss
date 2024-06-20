@@ -1,0 +1,76 @@
+@import "../../base";
+
+.loginConatiner{
+    background-image: url("/loginBG.png");
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginBox {
+    height: 600px;
+    width: 460px;
+    text-align: center;
+    border: 1px solid $black-secondary;
+    border-radius: 16px;
+    background-color: #fff;
+
+    &__logo {
+        margin: 0 auto;
+        height: 150px;
+        width: 250px;
+
+        img {
+            height: 150px;
+            width: 250px;
+            object-fit: cover;
+        }
+    }
+
+    &__name{
+        font-size: 36px;
+        margin-bottom: 40px;
+        font-weight: 500;
+        color: $black-secondary;
+    }
+
+    .signin {
+        margin: auto;
+        max-width: 320px;
+        display: flex;
+        padding: 0.5rem 4.3rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 700;
+        text-align: center;
+        font-family: "Montserrat", sans-serif;
+        vertical-align: middle;
+        align-items: center;
+        border-radius: 999px;
+        border: 0.5px solid rgba(0, 0, 0, 0.712);
+        gap: 0.75rem;
+        color: $black-secondary;
+        background-color:white;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0, 0.87, 0.12, 1);
+    }
+
+    .signin:hover {
+        transform: scale(1.025);
+    }
+
+    .signin:active {
+        transform: scale(0.975);
+    }
+
+    button svg {
+        height: 24px;
+        width: auto;
+    }
+}
+
+@media (max-width: $breakpoint-small){
+    .loginBox{
+        width: 340px;
+    }
+}

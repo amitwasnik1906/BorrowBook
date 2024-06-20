@@ -10,8 +10,7 @@
     }
 
     &__footer{
-        border: 1px solid blue;
-        position: absolute;
+        position: fixed;
         bottom: 0px;
     }
 }

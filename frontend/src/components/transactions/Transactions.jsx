@@ -14,9 +14,9 @@ function Transactions() {
                     ))
                 }
             </div>
-            <footer className='transactions__footer'>
+            <Container fluid className='transactions__footer'>
                 <Footer/>
-            </footer>
+            </Container>
         </div>
     )
 }
