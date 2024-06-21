@@ -6,6 +6,15 @@ const ApiErrorHandler = require("../utils/ApiErrorHandler.js");
 exports.createTransaction = asyncHandler(async (req, res, next) => {
   const transaction = await Transaction.create(req.body);
 
+  const {type} = req.body
+
+  if(type == "Borrow" || type == "Lend"){
+
+  }
+  else{
+    return next(new ApiErrorHandler(400, "Transaction type is Invalid"))
+  }
+
   res.status(201).json({
     success: true,
     transaction,
@@ -15,7 +24,13 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
 // get borrow/Lend Transactions of user
 // Search Transaction by some search keyword
 exports.getTransactions = asyncHandler(async (req, res, next) => {
-  const { userId, type } = req.body;
+  let { userId } = req.params;
+
+  if(!userId){
+    return next(new ApiErrorHandler(404, "userId is Required"))
+  }
+
+  const type = req.query.type
 
   const keyword = req.query.keyword
     ? {
@@ -36,7 +51,19 @@ exports.getTransactions = asyncHandler(async (req, res, next) => {
       }
     : {};
 
-  const transactions = await Transaction.find({ userId, type, ...keyword });
+  let transactions;
+  if (type) {
+    transactions = await Transaction.find({
+      userId,
+      type,
+      ...keyword,
+    });
+  } else {
+    transactions = await Transaction.find({
+      userId,
+      ...keyword,
+    });
+  }
 
   res.status(200).json({
     success: true,

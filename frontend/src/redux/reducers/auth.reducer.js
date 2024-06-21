@@ -7,7 +7,7 @@ import {
 
 
 
-export const authReducer = (prevState = {}, action) => {
+export const authReducer = (prevState = {user: null}, action) => {
   const { type, payload } = action;
 
   switch (type) {

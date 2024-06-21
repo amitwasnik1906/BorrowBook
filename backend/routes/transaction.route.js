@@ -3,7 +3,7 @@ const { createTransaction, getTransactions, updateTransaction, getSingleTransact
 
 const router = express.Router()
 
-router.route("/my/transactions").get(getTransactions)
+router.route("/my/transactions/:userId").get(getTransactions)
 router.route("/transaction/new").post(createTransaction)
 router.route("/transaction/:id").put(updateTransaction).get(getSingleTransaction).delete(deleteTransaction)
 

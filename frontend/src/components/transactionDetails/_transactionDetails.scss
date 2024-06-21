@@ -1,17 +1,96 @@
 @import "../../base";
 
-.details{
+.details {
     display: flex;
     flex-direction: column;
+    border: 1px solid red;
+    padding: 10px;
+    margin-top: 20px;
 
-    &__top{
+    &__top {
         display: flex;
         justify-content: space-between;
-        &__btn{
-            button{
-                // border: none;
-                background-color: transparent;
+
+        &__btn {
+
+            button {
+                border-radius: 10px;
+                background-color: $black-primary;
+                border: none;
+                color: #FFFFFF;
+                text-align: center;
+                font-size: 16px;
+                padding: 8px;
+                width: 110px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin-right: 0px;
             }
+
+            button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            button span:after {
+                content: '»';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -15px;
+                transition: 0.5s;
+            }
+
+            button:hover span {
+                padding-right: 15px;
+            }
+
+            button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+        }
+    }
+
+    &__money {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 400;
+        color: $black-primary;
+        margin-top: 20px;
+    }
+
+    &__main {
+        h1 {
+            display: flex;
+            align-items: center;
+
+            span {
+                font-size: 50px;
+                padding-bottom: 5px;
+            }
+        }
+
+        h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        h3{
+            font-size: 20px;
+            margin: 0;
+            font-weight: 400;
+            color: grey;
+        }
+        p{
+            color: rgba(128, 128, 128, 0.846);
+            margin-left: 50px;
+        }
+        div{
+            font-size: 20px;
+            font-weight: 400;
         }
     }
 }

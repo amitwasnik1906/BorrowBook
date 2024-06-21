@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
 import { Container } from "react-bootstrap"
@@ -6,6 +6,8 @@ import { BrowserRouter , Route, Routes} from 'react-router-dom'
 import Transactions from './components/transactions/Transactions'
 import TransactionDetails from './components/transactionDetails/TransactionDetails'
 import Login from './components/login/Login'
+import { useDispatch } from 'react-redux'
+import { getTransactionDetails, getTransactions } from './redux/actions/transaction.action'
 
 const Layout = ({children}) => {
   return (
@@ -22,6 +24,11 @@ const Layout = ({children}) => {
 }
 
 function App() {
+  // const dispatch = useDispatch();
+  // useEffect(()=>{
+  //   dispatch(getTransactions())
+  //   dispatch(getTransactionDetails())
+  // },[dispatch])
 
   return (
     <BrowserRouter>

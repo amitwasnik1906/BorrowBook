@@ -1,25 +1,17 @@
 import { combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
 import { authReducer } from "./reducers/auth.reducer";
-
-const sampleSlice = createSlice({
-  name: "sample",
-  initialState: {
-    name: "amit",
-    age: 20,
-  },
-  reducers: {},
-});
+import { transactionDetailsReducer, transactionsReducer } from "./reducers/transaction.reducer";
 
 const initialState = {};
 
 const rootReducer = combineReducers({
-  sample: sampleSlice.reducer,
-  auth: authReducer
+  auth: authReducer,
+  transactions: transactionsReducer,
+  transactionDetails: transactionDetailsReducer
 });
 
 const store = configureStore({
-  reducer: rootReducer,
-  initialState,
+  reducer: rootReducer
 });
 
 export default store;
