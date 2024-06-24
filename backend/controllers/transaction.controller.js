@@ -4,16 +4,44 @@ const ApiErrorHandler = require("../utils/ApiErrorHandler.js");
 
 // create Transaction
 exports.createTransaction = asyncHandler(async (req, res, next) => {
-  const transaction = await Transaction.create(req.body);
+  const {
+    userId,
+    userEmail,
+    userName,
+    amount,
+    name,
+    description,
+    status,
+    type,
+    date,
+  } = req.body;
 
-  const {type} = req.body
-
-  if(type == "Borrow" || type == "Lend"){
-
+  if (type == "Borrow" || type == "Lend") {
+  } else {
+    return next(new ApiErrorHandler(400, "Transaction type is Invalid"));
   }
-  else{
-    return next(new ApiErrorHandler(400, "Transaction type is Invalid"))
+
+  // make capitalize
+  function capitalizeWords(str) {
+    return str
+      .split(" ") // Split the string into an array of words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(" "); // Join the array back into a single string
   }
+
+  const capitalizeName = capitalizeWords(name);
+
+  const transaction = await Transaction.create({
+    userId,
+    userEmail,
+    userName,
+    amount,
+    name: capitalizeName,
+    description,
+    status,
+    type,
+    date,
+  });
 
   res.status(201).json({
     success: true,
@@ -26,11 +54,11 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
 exports.getTransactions = asyncHandler(async (req, res, next) => {
   let { userId } = req.params;
 
-  if(!userId){
-    return next(new ApiErrorHandler(404, "userId is Required"))
+  if (!userId) {
+    return next(new ApiErrorHandler(404, "userId is Required"));
   }
 
-  const type = req.query.type
+  const type = req.query.type;
 
   const keyword = req.query.keyword
     ? {
@@ -89,20 +117,32 @@ exports.getSingleTransaction = asyncHandler(async (req, res, next) => {
 
 // update Transaction details
 exports.updateTransaction = asyncHandler(async (req, res, next) => {
-  const { amount, name, description, status } = req.body;
+  const { amount, name, description, status, date, type } = req.body;
   const transaction = await Transaction.findById(req.params.id);
 
   if (!transaction) {
     return next(new ApiErrorHandler(404, "Transaction not found"));
   }
 
+  // make capitalize
+  function capitalizeWords(str) {
+    return str
+      .split(" ") // Split the string into an array of words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+      .join(" "); // Join the array back into a single string
+  }
+
+  const capitalizeName = capitalizeWords(name);
+
   const updatedTransaction = await Transaction.findByIdAndUpdate(
     req.params.id,
     {
       amount,
-      name,
+      name: capitalizeName,
       description,
       status,
+      date,
+      type,
     },
     {
       new: true,

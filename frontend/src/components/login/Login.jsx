@@ -1,14 +1,23 @@
-import React from 'react'
-import {useDispatch} from "react-redux"
+import React, { useEffect } from 'react'
+import { useDispatch } from "react-redux"
 import "./_login.scss"
 import BorrowBook from "/BorrowBook.svg"
 import { login } from '../../redux/actions/auth.action'
+import { useNavigate } from 'react-router'
 
 function Login() {
+    const accessToken = localStorage.getItem("BorrowBook-accessToken")
+
     const dispatch = useDispatch()
-    const loginHandle= () => {
+    const loginHandle = () => {
         dispatch(login())
     }
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (accessToken) {
+            navigate('/')
+        }
+    }, [navigate,accessToken])
     return (
         <div className='loginConatiner'>
             <div className='loginBox'>
@@ -19,7 +28,7 @@ function Login() {
                 <div className='loginBox__name'>Log In</div>
 
                 <button
-                    class="signin"
+                    className="signin"
                     onClick={loginHandle}
                 >
                     <svg
