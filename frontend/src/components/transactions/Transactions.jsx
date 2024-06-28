@@ -19,12 +19,14 @@ function Transactions() {
 
     return (
         <>
-            {(loading || newTransactionLoading)? <h1>loading...</h1> : <div className='transactions'>
+            {(loading || newTransactionLoading) ? <h1>loading...</h1> : <div className='transactions'>
                 <div className='transactions__container '>
                     {
-                        transactions?.map((item) => (
-                            <TransactionCard transaction={item} key={item._id} />
-                        ))
+                        transactions.length === 0 ? <h4 className='ms-2 mt-2'>Transaction not Found</h4> :
+
+                            transactions?.map((item) => (
+                                <TransactionCard transaction={item} key={item._id} />
+                            ))
                     }
                 </div>
             </div>}
