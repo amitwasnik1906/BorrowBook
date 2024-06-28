@@ -110,7 +110,7 @@ export const deleteTransaction = (_id, activeType) => async (dispatch) => {
       type: DELETE_TRANSACTION_REQUEST,
     });
 
-    axios.delete(`http://localhost:4000/api/v1/transaction/${_id}`);
+    await axios.delete(`http://localhost:4000/api/v1/transaction/${_id}`);
 
     dispatch({
       type: DELETE_TRANSACTION_SUCCESS,
@@ -118,6 +118,7 @@ export const deleteTransaction = (_id, activeType) => async (dispatch) => {
     });
 
     const user = JSON.parse(localStorage.getItem("BorrowBook-user"));
+
     dispatch(getTransactions(user.userId, activeType));
   } catch (error) {
     console.log(error);

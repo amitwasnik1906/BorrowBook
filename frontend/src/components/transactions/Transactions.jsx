@@ -8,26 +8,30 @@ import { getTransactions } from '../../redux/actions/transaction.action'
 function Transactions() {
     const dispatch = useDispatch()
     const { user } = useSelector(state => state.auth)
-    const transactions = useSelector(state => state.transactions.transactions)
+    const { transactions, loading } = useSelector(state => state.transactions)
     const { activeType } = useSelector(state => state.activeElement)
+    const { loading: newTransactionLoading } = useSelector(state => state.newTransaction)
+    const { loading: deleteTransactionLoading } = useSelector(state => state.transactionDetails)
 
     useEffect(() => {
         dispatch(getTransactions(user.userId, activeType))
-    }, [dispatch,activeType])
+    }, [dispatch, activeType])
 
     return (
-        <div className='transactions'>
-            <div className='transactions__container '>
-                {
-                    transactions.map((item) => (
-                        <TransactionCard transaction={item} key={item._id} />
-                    ))
-                }
-            </div>
+        <>
+            {(loading || newTransactionLoading)? <h1>loading...</h1> : <div className='transactions'>
+                <div className='transactions__container '>
+                    {
+                        transactions.map((item) => (
+                            <TransactionCard transaction={item} key={item._id} />
+                        ))
+                    }
+                </div>
+            </div>}
             <div className='transactions__footer' >
                 <Footer />
             </div>
-        </div>
+        </>
     )
 }
 

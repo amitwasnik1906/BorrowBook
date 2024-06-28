@@ -1,18 +1,19 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser")
-const cors = require("cors")
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const path = require("path");
 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(express.json())
-app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
 // Routes
-const transactionRoute = require("./routes/transaction.route")
-app.use("/api/v1", transactionRoute)
+const transactionRoute = require("./routes/transaction.route");
+app.use("/api/v1", transactionRoute);
 
 // middlewares
-const errorMiddleware = require("./middleware/error")
-app.use(errorMiddleware)
+const errorMiddleware = require("./middleware/error");
+app.use(errorMiddleware);
 
-module.exports = app
+module.exports = app;

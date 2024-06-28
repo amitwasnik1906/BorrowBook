@@ -16,8 +16,6 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
     date,
   } = req.body;
 
-  console.log(req.body);
-
   if (type == "Borrow" || type == "Lend") {
   } else {
     return next(new ApiErrorHandler(400, "Transaction type is Invalid"));

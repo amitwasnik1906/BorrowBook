@@ -9,10 +9,11 @@ export const setActiveElement = (element) => async (dispatch) =>{
             type:SET_ACTIVE_ELEMENT_SUCCESS,
             payload: {element}
         })
+        
+    } catch (error) {
+        console.log(error);
         dispatch({
             type:SET_ACTIVE_ELEMENT_FAIL
         })
-    } catch (error) {
-        console.log(error);
     }
 }
