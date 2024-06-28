@@ -22,7 +22,7 @@ function Transactions() {
             {(loading || newTransactionLoading)? <h1>loading...</h1> : <div className='transactions'>
                 <div className='transactions__container '>
                     {
-                        transactions.map((item) => (
+                        transactions?.map((item) => (
                             <TransactionCard transaction={item} key={item._id} />
                         ))
                     }

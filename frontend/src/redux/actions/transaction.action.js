@@ -12,7 +12,9 @@ import {
   TRANSACTION_DETAILS_FAIL,
   TRANSACTION_DETAILS_REQUEST,
   TRANSACTION_DETAILS_SUCCESS,
+  UPDATE_TRANSACTION_FAIL,
   UPDATE_TRANSACTION_REQUEST,
+  UPDATE_TRANSACTION_SUCCESS,
 } from "../actionTypes";
 
 export const getTransactions = (userId, type, keyword) => async (dispatch) => {
@@ -21,21 +23,21 @@ export const getTransactions = (userId, type, keyword) => async (dispatch) => {
       type: TRANSACTIONS_REQUEST,
     });
 
-    let link = `http://localhost:4000/api/v1/my/transactions/${userId}`;
+    let link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/my/transactions/${userId}`;
 
     if ((type === "Borrow" || type === "Lend") && keyword) {
-      link = `http://localhost:4000/api/v1/my/transactions/${userId}?type=${type}&keyword=${keyword}`;
+      link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/my/transactions/${userId}?type=${type}&keyword=${keyword}`;
     }
 
     if ((type === "Borrow" || type === "Lend") && !keyword) {
-      link = `http://localhost:4000/api/v1/my/transactions/${userId}?type=${type}`;
+      link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/my/transactions/${userId}?type=${type}`;
     }
 
     if(type !== "Borrow" && type !== "Lend" && keyword){
-      link = `http://localhost:4000/api/v1/my/transactions/${userId}?keyword=${keyword}`;
+      link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/v1/my/transactions/${userId}?keyword=${keyword}`;
     }
 
-    console.log(link);
+    // console.log(link);
 
     const { data } = await axios.get(link);
 
@@ -57,7 +59,7 @@ export const getTransactionDetails = (id) => async (dispatch) => {
       type: TRANSACTION_DETAILS_REQUEST,
     });
 
-    let link = `http://localhost:4000/api/v1/transaction/${id}`;
+    let link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/transaction/${id}`;
 
     const { data } = await axios.get(link);
 
@@ -84,7 +86,7 @@ export const newTransaction = (newData, type) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "http://localhost:4000/api/v1/transaction/new",
+      `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/transaction/new`,
       newData,
       config
     );
@@ -110,7 +112,7 @@ export const deleteTransaction = (_id, activeType) => async (dispatch) => {
       type: DELETE_TRANSACTION_REQUEST,
     });
 
-    await axios.delete(`http://localhost:4000/api/v1/transaction/${_id}`);
+    await axios.delete(`${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/transaction/${_id}`);
 
     dispatch({
       type: DELETE_TRANSACTION_SUCCESS,
@@ -140,13 +142,13 @@ export const updateTransaction = (_id, newData) => async (dispatch) => {
     };
 
     const { data } = await axios.put(
-      `http://localhost:4000/api/v1/transaction/${_id}`,
+      `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/transaction/${_id}`,
       newData,
       config
     );
 
     dispatch({
-      type: NEW_TRANSACTION_SUCCESS,
+      type: UPDATE_TRANSACTION_SUCCESS,
       payload: { transaction: data.transaction },
     });
 
@@ -154,7 +156,7 @@ export const updateTransaction = (_id, newData) => async (dispatch) => {
   } catch (error) {
     console.log(error.response.data.message);
     dispatch({
-      type: NEW_TRANSACTION_FAIL,
+      type: UPDATE_TRANSACTION_FAIL,
     });
   }
 };
