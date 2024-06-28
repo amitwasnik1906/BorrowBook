@@ -21,7 +21,6 @@ function TransactionCard({ transaction }) {
     navigate(`/transaction/${_id}`)
   }
 
-
   const handleDelete = () => {
     dispatch(deleteTransaction(_id, activeType))
   }
@@ -54,7 +53,7 @@ function TransactionCard({ transaction }) {
             <MdOutlineCurrencyRupee size={30}/>
             <h3>{amount}</h3>
           </div>
-          <span className='me-4'>{type}</span>
+          <span className='right-text'>{type}</span>
         </div>
         <div className=' icons'>
           <LuArrowUpLeftSquare size={28} onClick={handleClick} />

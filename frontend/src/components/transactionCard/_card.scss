@@ -25,6 +25,7 @@
             h3{
                 font-size: 30px;
                 font-weight: 400;
+                color: #071952;
             }
             span{
                 font-size: 16px;
@@ -38,7 +39,8 @@
         .amount {
             display: flex;
             flex-direction: column;
-            text-align: start;
+            justify-content: flex-end;
+            justify-content: space-between;
             div{
                 display: flex;
                 align-items: center;
@@ -47,11 +49,11 @@
                     margin-top: 0;
                 }
             }
-            span{
+            .right-text{
                 font-size: 16px;
                 color: orange;
                 font-weight: 500;
-                margin: auto;
+                margin-left: auto;
             }
         }
 

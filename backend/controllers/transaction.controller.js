@@ -16,6 +16,8 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
     date,
   } = req.body;
 
+  console.log(req.body);
+
   if (type == "Borrow" || type == "Lend") {
   } else {
     return next(new ApiErrorHandler(400, "Transaction type is Invalid"));
@@ -92,6 +94,8 @@ exports.getTransactions = asyncHandler(async (req, res, next) => {
       ...keyword,
     });
   }
+
+  transactions.reverse()
 
   res.status(200).json({
     success: true,

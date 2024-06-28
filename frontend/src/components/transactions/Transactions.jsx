@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import "./_transactions.scss"
-import { Container } from 'react-bootstrap'
 import TransactionCard from '../transactionCard/TransactionCard'
 import Footer from '../footer/Footer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -25,9 +24,9 @@ function Transactions() {
                     ))
                 }
             </div>
-            <Container fluid className='transactions__footer' >
+            <div className='transactions__footer' >
                 <Footer />
-            </Container>
+            </div>
         </div>
     )
 }

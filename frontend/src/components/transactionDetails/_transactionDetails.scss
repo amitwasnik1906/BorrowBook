@@ -29,7 +29,7 @@
                 width: 110px;
                 transition: all 0.5s;
                 cursor: pointer;
-                margin-right: 0px;
+                margin-left: 10px;
             }
 
             button span {
@@ -79,7 +79,7 @@
         }
 
         h2 {
-            font-size: 40px;
+            font-size: 30px;
             margin-bottom: 20px;
         }
 
@@ -123,6 +123,60 @@
 
         &:hover {
             background-color: rgba(170, 0, 0, 0.901);
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .details {
+        &__top {
+            &__btn {
+                display: flex;
+                flex-direction: column;
+
+                button {
+                    margin-bottom: 10px;
+                    font-size: 16px;
+                    padding: 8px;
+                    width: 110px;
+                }
+            }
+        }
+
+        &__money {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 400;
+            margin-top: 0px;
+        }
+
+        &__main {
+            h1 {
+                display: flex;
+                align-items: center;
+    
+                span {
+                    font-size: 50px;
+                    padding-bottom: 5px;
+                }
+            }
+    
+            h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+    
+            h3 {
+                font-size: 18px;
+                margin: 0;
+                font-weight: 400;
+                color: grey;
+            }
+    
+            div {
+                font-size: 18px;
+                font-weight: 400;
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ import Login from './components/login/Login'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTransactionDetails, getTransactions } from './redux/actions/transaction.action'
 import { loadUser } from './redux/actions/auth.action'
+import Home from "./components/home/Home"
 
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(false)
@@ -41,16 +42,16 @@ function App() {
   return (
 
     <Routes>
-      <Route exact path="/" element={<Layout> <h1>home</h1> </Layout>} />
-      <Route exact path="/about" element={<Layout> <h1>About us</h1> </Layout>} />
+      <Route exact path="/" element={<Layout> <Home/> </Layout>} />
+      <Route exact path="/about" element={<Layout> <h1>this page is under development</h1> </Layout>} />
 
       <Route exact path="/login" element={<Login />} />
 
-      <Route exact path="/transactions/" element={<Layout> {accessToken ? <Transactions /> : <h1>login to access</h1>}</Layout>} />
+      <Route exact path="/transactions" element={<Layout> {accessToken ? <Transactions /> : <h1>login to access</h1>}</Layout>} />
 
       <Route exact path="/transaction/:id" element={<Layout> {accessToken ? <TransactionDetails /> : <h1>login to access</h1>}</Layout>} />
 
-      <Route exact path="/dashbord" element={<Layout> {accessToken ? <h1>Under Process </h1> : <h1>login to access</h1>}</Layout>} />
+      <Route exact path="/dashbord" element={<Layout> {accessToken ? <h1>This Feature is currently not available</h1> : <h1>login to access</h1>}</Layout>} />
 
       <Route path="*" element={<h1>404 NOT FOUND</h1>} />
 

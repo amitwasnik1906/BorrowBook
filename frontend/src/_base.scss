@@ -1,8 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    // transition: all 1s;
+    // box-sizing: border-box;
 }
 
 $black-primary: #111111;
@@ -13,3 +12,20 @@ $breakpoint-large: 1100px;
 $breakpoint-medium: 680px;
 $breakpoint-small: 500px;
 
+.app__container{
+    margin-top: 8vh;
+    .app__main{
+        height: 92vh;
+        margin-left: 240px;
+    }
+}
+
+@media (max-width: $breakpoint-medium){
+    .app__container{
+        margin-top: 8vh;
+        .app__main{
+            height: 92vh;
+            margin-left: 0px;
+        }
+    }
+}

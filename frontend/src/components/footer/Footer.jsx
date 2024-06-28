@@ -55,7 +55,7 @@ function Footer() {
         <button className={activeElement === "Borrow" ? 'button2 activeElement' : "button2"} onClick={(e) => handleClick("Borrow")}>Borrow</button>
       </Col>
       <Col xs={3} className='text-center clm '>
-        <Popup trigger={<button className="button2"><FaCirclePlus size={24} /></button>} position="top">
+        <Popup className='popup' trigger={<button className="button2"><FaCirclePlus size={24} /></button>} position="top" >
           <section className="add-card page newTransactionPopUp">
             <form className="form" onSubmit={handleSubmit}>
               <label htmlFor="name" className="label">

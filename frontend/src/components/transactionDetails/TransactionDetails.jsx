@@ -132,7 +132,7 @@ function TransactionDetails() {
 
                         </Popup>
 
-                        <Popup trigger={<button className='ms-4'>
+                        <Popup trigger={<button>
                             <MdDelete size={22} />
                             <span className='ms-1'>Delete</span>
                         </button>} position="bottom">

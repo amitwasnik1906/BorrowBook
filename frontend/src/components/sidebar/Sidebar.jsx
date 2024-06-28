@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./_sidebar.scss"
 import { Link } from "react-router-dom"
 import { IoHomeOutline, IoReturnDownBackOutline } from "react-icons/io5";
 import { RiFolderInfoLine } from "react-icons/ri";
 import { RiMoneyRupeeCircleFill } from "react-icons/ri";
 import { MdDashboard } from "react-icons/md";
-import { GrLogout } from "react-icons/gr";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/actions/auth.action';
-import { IoReorderThreeOutline } from "react-icons/io5";
 
-function Sidebar({sidebar}) {
-  
+function Sidebar({ sidebar }) {
+
   const [activeElement, setActiveElement] = useState('')
 
   const { accessToken } = useSelector((state) => state.auth)
@@ -25,30 +23,47 @@ function Sidebar({sidebar}) {
     setActiveElement(value)
   }
 
+  useEffect(() => {
+    const currentURL = window.location.href;
+    const splitURL = currentURL.split('/')
+    if(splitURL[3] === ""){
+      setActiveElement("Home")
+    }
+    else if(splitURL[3] === "about"){
+      setActiveElement("About")
+    }
+    else if(splitURL[3] === "transactions"){
+      setActiveElement("Transactions")
+    }
+    else if(splitURL[3] === "dashbord"){
+      setActiveElement("Dashbord")
+    }
+  })
+
   return (
     <nav className={sidebar ? "sidebar open" : "sidebar "}>
       <div className="sidebar__up">
-        <Link to="/" onClick={(e)=>handleClick("Home")} className={activeElement === "Home" ? 'active' : ""}>
+        <Link to="/" onClick={(e) => handleClick("Home")} className={activeElement === "Home" ? 'active' : ""}>
           <div>
             <IoHomeOutline size={28} />
             <span>Home</span>
           </div>
         </Link >
 
-        <Link to="/about" onClick={(e)=>handleClick("About")} className={activeElement === "About" ? 'active' : ""}>
+        <Link to="/about" onClick={(e) => handleClick("About")} className={activeElement === "About" ? 'active' : ""}>
           <div>
             <RiFolderInfoLine size={28} />
             <span>About us</span>
           </div>
         </Link>
 
-        <Link to={`/transactions`} onClick={(e)=>handleClick("Transactions")} className={activeElement === "Transactions" ? 'active' : ""}>
+        <Link to={`/transactions`} onClick={(e) => handleClick("Transactions")} className={activeElement === "Transactions" ? 'active' : ""}>
           <div>
             <RiMoneyRupeeCircleFill size={28} />
             <span>Transactions</span>
           </div>
         </Link>
-        <Link to="/dashbord" onClick={(e)=>handleClick("Dashbord")} className={activeElement === "Dashbord" ? 'active' : ""}>
+        <Link to="/dashbord" onClick={(e) => handleClick("Dashbord")} className={activeElement === "Dashbord" ? 'active' : ""}>
           <div>
             <MdDashboard size={28} />
             <span>Dashbord</span>
