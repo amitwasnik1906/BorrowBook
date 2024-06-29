@@ -29,7 +29,6 @@ function TransactionCard({ transaction }) {
 
   const handleUpdateStatus = () => {
     const newStatus = !status;
-    console.log(newStatus);
     dispatch(updateTransaction(_id, { name, amount, description, type, status: newStatus, date }, activeType))
   }
 
