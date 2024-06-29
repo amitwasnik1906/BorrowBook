@@ -131,7 +131,7 @@ export const deleteTransaction = (_id, activeType) => async (dispatch) => {
   }
 };
 
-export const updateTransaction = (_id, newData) => async (dispatch) => {
+export const updateTransaction = (_id, newData, activeType) => async (dispatch) => {
   try {
     dispatch({
       type: UPDATE_TRANSACTION_REQUEST,
@@ -153,6 +153,9 @@ export const updateTransaction = (_id, newData) => async (dispatch) => {
     });
 
     dispatch(getTransactionDetails(_id));
+
+    const user = JSON.parse(localStorage.getItem("BorrowBook-user"));
+    dispatch(getTransactions(user.userId, activeType))
   } catch (error) {
     console.log(error.response.data.message);
     dispatch({
