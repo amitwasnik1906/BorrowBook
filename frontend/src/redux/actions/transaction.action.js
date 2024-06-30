@@ -34,7 +34,7 @@ export const getTransactions = (userId, type, keyword) => async (dispatch) => {
     }
 
     if(type !== "Borrow" && type !== "Lend" && keyword){
-      link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/v1/my/transactions/${userId}?keyword=${keyword}`;
+      link = `${String(import.meta.env.VITE_APP_BACKEND_URI)}/api/v1/my/transactions/${userId}?keyword=${keyword}`;
     }
 
     // console.log(link);
@@ -46,7 +46,7 @@ export const getTransactions = (userId, type, keyword) => async (dispatch) => {
       payload: { transactions: data.transactions },
     });
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error.message);
     dispatch({
       type: TRANSACTIONS_FAIL,
     });
@@ -68,7 +68,7 @@ export const getTransactionDetails = (id) => async (dispatch) => {
       payload: { details: data.transaction },
     });
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error.message);
     dispatch({
       type: TRANSACTION_DETAILS_FAIL,
     });
@@ -99,7 +99,7 @@ export const newTransaction = (newData, type) => async (dispatch) => {
     const user = JSON.parse(localStorage.getItem("BorrowBook-user"));
     dispatch(getTransactions(user.userId, type));
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error.message);
     dispatch({
       type: NEW_TRANSACTION_FAIL,
     });
@@ -123,7 +123,7 @@ export const deleteTransaction = (_id, activeType) => async (dispatch) => {
 
     dispatch(getTransactions(user.userId, activeType));
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     dispatch({
       type: DELETE_TRANSACTION_FAIL,
       payload: { isDeleted: false },
@@ -157,7 +157,7 @@ export const updateTransaction = (_id, newData, activeType) => async (dispatch) 
     const user = JSON.parse(localStorage.getItem("BorrowBook-user"));
     dispatch(getTransactions(user.userId, activeType))
   } catch (error) {
-    console.log(error.response.data.message);
+    console.log(error.message);
     dispatch({
       type: UPDATE_TRANSACTION_FAIL,
     });
